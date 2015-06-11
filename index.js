@@ -4,8 +4,6 @@
  */
 require('progenitor.js')();
 
-console.log('responder', require('./lib/responder'));
-
 exports = module.exports = {
   Responder: require('./lib/responder'),
   Routing: require('./lib/routing'),
