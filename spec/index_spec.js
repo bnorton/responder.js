@@ -1,27 +1,25 @@
 require('./helpers/spec_helper.js');
 
-describe('lib', function() {
-  var lib, Library = require('../lib/index');
+describe('responder.js', function() {
+  var index = require('../index'),
+    requestController = index.RequestController,
+    realtimeController = index.RealtimeController,
+    routing = index.Routing,
+    responder = index.Responder;
 
-  beforeEach(function() {
-    lib = new Library({name: 'John Doe'});
+  it('should have the request controller', function() {
+    expect(requestController.className).toBe('RequestController');
   });
 
-  describe('.self', function() {
-    it('should be itself', function() {
-      expect(Library.self()).toBe(Library);
-    });
-
-    describe('when the lib is applied', function() {
-      it('should be itself' , function() {
-        expect(Library.self.apply(global)).toBe(Library);
-      });
-    });
+  it('should have the realtime controller', function() {
+    expect(realtimeController.className).toBe('RealtimeController');
   });
 
-  describe('#say', function() {
-    it('should have the name', function() {
-      expect(lib.say()).toBe('Hi, I\'m John Doe');
-    });
+  it('should have outing', function() {
+    expect(routing.className).toBe('Routing');
+  });
+
+  it('should have the responder', function() {
+    expect(typeof responder).toBe('function');
   });
 });

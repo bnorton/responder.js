@@ -1,12 +1,19 @@
 {
-  "name": "{{name}}.js",
-  "repository": "https://github.com/{{username}}/{{name}}.js.git",
-  "version": "0.1.0",
+  "name": "responder.js",
+  "repository": "https://github.com/bnorton/responder.js.git",
+  "version": "0.9.0",
   "license": "MIT",
-  "description": "",
+  "description": "Generic high-level DSL for routing and controller logic on express.js and socket.io",
   "keywords": [
+    "express.js",
+    "socket.io",
+    "controllers",
+    "routing",
+    "realtime"
   ],
   "dependencies": {
+    "extend": "*",
+    "progenitor.js": "*"
   },
   "devDependencies": {
     "minijasminenode2": "bnorton/minijasminenode"
