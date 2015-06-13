@@ -14,7 +14,7 @@ describe(Responder.className, function() {
     request = jasmine.createSpy('request');
     request.body = body = { body: '1' };
     request.params = params = { params: '2' };
-    response = jasmine.createSpyObj('response', ['status', 'json']);
+    response = jasmine.createSpyObj('response', ['status', 'json', 'redirect']);
   });
 
   describe('.run', function() {
@@ -66,9 +66,7 @@ describe(Responder.className, function() {
       });
     });
 
-    describe('when sending a relation-like things', function() {
-      var model;
-
+    describe('when sending relation-like things', function() {
       beforeEach(function() { _name = 'index';
         instance = responder();
 
@@ -100,6 +98,76 @@ describe(Responder.className, function() {
         expect(response.status).toHaveBeenCalledWith(201);
         expect(response.json).toHaveBeenCalledWith({status: 201, meta: {}});
       });
+    });
+  });
+
+  describe('RequestController#send401', function() {
+    beforeEach(function() {
+      responder().send401();
+    });
+
+    it('should be a 401', function() {
+      expect(response.status).toHaveBeenCalledWith(401);
+
+    });
+
+    it('should send the error info', function() {
+      expect(response.json).toHaveBeenCalledWith({code: 401, meta: {}, error: { message: 'Authentication error' }});
+    });
+  });
+
+  describe('RequestController#send302', function() {
+    beforeEach(function() {
+      responder().send302('foo-bar');
+    });
+
+    it('should redirect to the target', function() {
+      expect(response.redirect).toHaveBeenCalledWith(302, 'foo-bar');
+    });
+  });
+
+  describe('RequestController#send404', function() {
+    beforeEach(function() {
+      responder().send404();
+    });
+
+    it('should be a 404', function() {
+      expect(response.status).toHaveBeenCalledWith(404);
+
+    });
+
+    it('should send the error info', function() {
+      expect(response.json).toHaveBeenCalledWith({code: 404, meta: {}, error: { message: 'Resource not found' }});
+    });
+  });
+
+  describe('RequestController#send422', function() {
+    beforeEach(function() {
+      responder().send422();
+    });
+
+    it('should be a 422', function() {
+      expect(response.status).toHaveBeenCalledWith(422);
+
+    });
+
+    it('should send the error info', function() {
+      expect(response.json).toHaveBeenCalledWith({code: 422, meta: {}, error: { message: 'Unprocessable request' }});
+    });
+  });
+
+  describe('RequestController#send500', function() {
+    beforeEach(function() {
+      responder().send500();
+    });
+
+    it('should be a 500', function() {
+      expect(response.status).toHaveBeenCalledWith(500);
+
+    });
+
+    it('should send the error info', function() {
+      expect(response.json).toHaveBeenCalledWith({code: 500, meta: {}, error: { message: 'Server error' }});
     });
   });
 });
