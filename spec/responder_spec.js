@@ -124,6 +124,11 @@ describe(Responder.className, function() {
     it('should redirect to the target', function() {
       expect(response.redirect).toHaveBeenCalledWith(302, 'foo-bar');
     });
+
+    it('should be bound', function() {
+      responder().send302.call(global, 'foo-bar-baz');
+      expect(response.redirect).toHaveBeenCalledWith(302, 'foo-bar-baz');
+    })
   });
 
   describe('RequestController#send404', function() {
