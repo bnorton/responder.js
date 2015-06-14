@@ -1,7 +1,7 @@
 {
   "name": "responder.js",
   "repository": "https://github.com/bnorton/responder.js.git",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "license": "MIT",
   "description": "Generic high-level DSL for routing and controller logic on express.js and socket.io",
   "keywords": [
